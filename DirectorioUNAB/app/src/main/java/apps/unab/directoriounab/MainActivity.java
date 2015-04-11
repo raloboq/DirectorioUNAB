@@ -1,5 +1,6 @@
 package apps.unab.directoriounab;
 
+import android.database.SQLException;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +26,38 @@ public class MainActivity extends ActionBarActivity {
 
         //docentes = new ArrayList<Docente>();
 
-        Docente d1 = new Docente();
-        d1.setNombre("Wilson Briceño");
-        d1.setCargo("Decano");
+        DatabaseHandler database = new DatabaseHandler(getApplicationContext());
+
+        try {
+            database.create();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try{database.open();
+    }catch(SQLException sqle){
+        throw sqle;
+    }
+
+        List<DatosDocentes> lista =  database.getAllContacts();
+
+
+
+        for(int i = 0; i<lista.size();i++){
+
+            Docente d1 = new Docente();
+            d1.setNombre(lista.get(i).getNombre());
+            d1.setCargo(lista.get(i).getCargo());
+            d1.setTelefono(String.valueOf(lista.get(i).getTelefono()));
+            d1.setFoto("foto1");
+
+            docentes.add(d1);
+
+
+        }
+
+
+
+       /* d1.setCargo("Decano");
         d1.setTelefono("1234");
         d1.setFoto("foto1");
         Docente d2 = new Docente();
@@ -38,7 +69,7 @@ public class MainActivity extends ActionBarActivity {
 
         docentes.add(d1);
         docentes.add(d2);
-        //docentes.add(d3);
+        //docentes.add(d3);*/
 
         adapter= new ListaAdapter(this,docentes);
 
