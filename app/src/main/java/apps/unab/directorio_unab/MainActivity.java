@@ -1,11 +1,15 @@
 package apps.unab.directorio_unab;
 
+import android.content.Intent;
 import android.database.SQLException;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.io.IOException;
@@ -49,6 +53,8 @@ public class MainActivity extends ActionBarActivity {
             d1.setCargo(lista.get(i).getCargo());
             d1.setTelefono(String.valueOf(lista.get(i).getTelefono()));
             d1.setFoto("foto1");
+            d1.setId(lista.get(i).getId());
+            d1.setCorreo(lista.get(i).getCorreo());
 
             docentes.add(d1);
 
@@ -78,6 +84,29 @@ public class MainActivity extends ActionBarActivity {
 
         ListView list = (ListView) findViewById(R.id.listViewDocente);
         list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent first = new Intent(getApplicationContext(),SecondActivity.class);
+                first.putExtra("iduser",docentes.get(position).getId());
+                startActivity(first);
+            }
+        });
+
+
+        /*list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "your_email"));
+                intent.putExtra(Intent.EXTRA_SUBJECT, "your_subject");
+                intent.putExtra(Intent.EXTRA_TEXT, "your_text");
+                startActivity(intent);
+            }
+        });*/
+
+
+
     }
 
 

@@ -26,7 +26,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
 
-    private static String DB_PATH = "/data/data/apps.unab.directoriounab/databases/";
+    private static String DB_PATH = "/data/data/apps.unab.directorio_unab/databases/";
 
     // Database Name
     private static final String DATABASE_NAME = "docentes.db";
@@ -64,13 +64,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             do {
             DatosDocentes contact = new DatosDocentes();
 
-                Log.i("db",cursor.getString(0)+" "+cursor.getString(1)+" "+cursor.getString(2));
-                contact.setId(Integer.parseInt(cursor.getString(1)));
-                contact.setNombre(cursor.getString(2));
-                contact.setTelefono(cursor.getInt(0));
+                Log.i("db",cursor.getString(0)+" "+cursor.getString(1)+" "+cursor.getString(2)+" "+cursor.getString(3)+" "+cursor.getString(4));
+                contact.setId(Integer.parseInt(cursor.getString(0)));
+                contact.setNombre(cursor.getString(3));
+                contact.setTelefono(cursor.getInt(4));
+                contact.setCorreo(cursor.getString(2));
+                contact.setCargo(cursor.getString(1));
+
                 // Adding contact to list
                 contactList.add(contact);
                 } while (cursor.moveToNext());
+            Log.i("identificador","aca voy ");
+
             }
 
         // return contact list
@@ -80,7 +85,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Adding new contact
     public void addContact(DatosDocentes contact) {
         SQLiteDatabase db = this.getWritableDatabase();
-
+        Log.i("identificador","aca voy 2 ");
         ContentValues values = new ContentValues();
         values.put(KEY_ID,contact.getId());
         values.put(KEY_CARGO,contact.getCargo());

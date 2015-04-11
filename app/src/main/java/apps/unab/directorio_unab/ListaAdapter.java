@@ -46,12 +46,14 @@ public class ListaAdapter extends ArrayAdapter<Docente> {
             TextView nombre = (TextView)rowView.findViewById(R.id.NombreDocente);
             TextView cargo = (TextView)rowView.findViewById(R.id.CargoDocente);
             TextView telefono = (TextView)rowView.findViewById(R.id.TelefonoDocente);
+            TextView correo = (TextView)rowView.findViewById(R.id.CorreoDocente);
             ImageView foto = (ImageView)rowView.findViewById(R.id.FotoDocente);
 
             nombre.setText(object.getNombre());
             cargo.setText(object.getCargo());
             telefono.setText(object.getTelefono());
-            foto.setImageResource(context.getResources().getIdentifier(object.getFoto(),"drawable","apps.unab.directoriounab"));
+            correo.setText(object.getCorreo());
+            foto.setImageResource(context.getResources().getIdentifier(object.getFoto(),"drawable","apps.unab.directorio_unab"));
 
 
             return rowView;

@@ -41,11 +41,12 @@ public class DatosDocentes {
 
     int id;
 
-    public DatosDocentes(int id, String nombre, String cargo, int telefono) {
+    public DatosDocentes(int id, String nombre, String cargo, int telefono, String correo) {
         this.id = id;
         this.nombre = nombre;
         this.cargo = cargo;
         this.telefono = telefono;
+
     }
 
     public DatosDocentes(){}
@@ -53,4 +54,14 @@ public class DatosDocentes {
     String nombre;
     int telefono;
     String cargo;
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    String correo;
 }
